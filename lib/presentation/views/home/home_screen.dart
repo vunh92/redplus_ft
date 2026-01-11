@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:redplus_ft/app/cubit/base_cubit.dart';
 import 'package:redplus_ft/presentation/views/home/cubit/home_cubit.dart';
+import 'package:redplus_ft/presentation/views/home/widgets/brand_widget.dart';
+import 'package:redplus_ft/presentation/views/home/widgets/deal_widget.dart';
 
 import '../../../app/common/common.dart';
 import '../../../app/config/config.dart';
@@ -65,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: SingleChildScrollView(
               // physics: ClampingScrollPhysics(),
               child: Column(
-                spacing: NumberConstant.basePadding,
+                spacing: NumberConstant.basePaddingLarge,
                 children: [
                   SizedBox(
                     child: Stack(
@@ -104,6 +106,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   BannerWidget(),
                   HotWidget(),
+                  DealWidget(),
+                  BrandWidget(),
+                  SizedBox(height: 50,)
                 ],
               ),
             ),

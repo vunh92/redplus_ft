@@ -46,6 +46,8 @@ import 'package:redplus_ft/presentation/views/bottom_navigation_bar/bloc/bottom_
     as _i921;
 import 'package:redplus_ft/presentation/views/home/cubit/banner_cubit.dart'
     as _i52;
+import 'package:redplus_ft/presentation/views/home/cubit/deal_cubit.dart'
+    as _i779;
 import 'package:redplus_ft/presentation/views/home/cubit/home_cubit.dart'
     as _i930;
 import 'package:redplus_ft/presentation/views/home/cubit/hot_cubit.dart'
@@ -102,6 +104,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i930.HomeCubit(gh<_i1038.HomeRepository>()));
     gh.factory<_i52.BannerCubit>(
         () => _i52.BannerCubit(gh<_i1038.HomeRepository>()));
+    gh.factory<_i779.DealCubit>(
+        () => _i779.DealCubit(gh<_i1038.HomeRepository>()));
     gh.factory<_i77.OtpRepository>(
         () => _i684.OtpRepositoryImpl(gh<_i894.OtpApi>()));
     gh.factory<_i987.OtpCubit>(() => _i987.OtpCubit(

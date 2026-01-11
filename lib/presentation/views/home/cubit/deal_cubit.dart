@@ -1,19 +1,19 @@
-import 'package:injectable/injectable.dart';
-import 'package:redplus_ft/app/cubit/base_cubit.dart';
 
+import 'package:injectable/injectable.dart';
+import '../../../../app/cubit/base_cubit.dart';
 import '../../../../domain/repository/home_repository.dart';
 
-part 'hot_state.dart';
+part 'deal_state.dart';
 
 @Injectable()
-class HotCubit extends BaseCubit {
+class DealCubit extends BaseCubit {
   final HomeRepository _homeRepository;
-  HotCubit(this._homeRepository) : super(HotInitial());
+  DealCubit(this._homeRepository) : super(DealInitial());
 
-  Future<void> fetchHot() async {
+  Future<void> fetchDeal() async {
     try {
       emit(LoadingState());
-      final either = await _homeRepository.fetchHot();
+      final either = await _homeRepository.fetchDeal();
       either.fold(
             (failure) {
           emit(ErrorState(failure.message));

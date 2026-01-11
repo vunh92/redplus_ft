@@ -2,10 +2,12 @@ import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:redplus_ft/data/mock/mock_banner.dart';
+import 'package:redplus_ft/data/mock/mock_deal.dart';
 import 'package:redplus_ft/domain/model/banner.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../app/common/common.dart';
+import '../../domain/model/deal.dart';
 import '../../domain/repository/home_repository.dart';
 import '../data_source/load_json_assets.dart';
 import '../network/home_api.dart';
@@ -44,10 +46,15 @@ class HomeRepositoryImpl extends HomeRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> fetchDeal() async {
-    // final http.Response res = await _homeApi.fetchDeal();
-    final list = await loadJsonAssets('assets/jsons/deal.json');
-    return Right(true);
+  Future<Either<Failure, List<DealModel>>> fetchDeal() async {
+    try {
+      final http.Response res = await _homeApi.fetchHot();
+      await Future.delayed(Duration(milliseconds: 500));
+      final listDeal = MockDeal().getListDeal();
+      return Right(listDeal);
+    } catch (e) {
+      return Left(Failure(e.hashCode, e.toString()));
+    }
   }
 
   @override
