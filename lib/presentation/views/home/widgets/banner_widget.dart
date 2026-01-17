@@ -7,6 +7,7 @@ import 'package:redplus_ft/app/cubit/base_cubit.dart';
 import 'package:redplus_ft/presentation/views/home/cubit/banner_cubit.dart';
 
 import '../../../../app/common/common.dart';
+import '../../../../app/config/config.dart';
 import '../../../../di/di.dart';
 import '../../../../domain/model/banner.dart';
 
@@ -60,9 +61,12 @@ class BannerWidget extends StatelessWidget {
                       builder: (BuildContext context) {
                         return GestureDetector(
                           onTap: () {
-                            // context.pushNamed(
-                            //     AppRouteConstants.categoryproductsScreenRoute.name,
-                            //     pathParameters: {'category': i['category']!});
+                            context.pushNamed(AppRouteConstants.postDetailScreenRoute.name,
+                                queryParameters: {
+                                  'imageBanner': item.imageUrl,
+                                  'title': item.title,
+                                  'description': item.content,
+                                });
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width,

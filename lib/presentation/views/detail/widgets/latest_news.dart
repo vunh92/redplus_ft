@@ -2,22 +2,24 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:redplus_ft/app/common/common.dart';
-import 'package:redplus_ft/app/cubit/base_cubit.dart';
-import 'package:redplus_ft/domain/model/banner.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 
+import '../../../../app/common/common.dart';
 import '../../../../app/config/config.dart';
+import '../../../../app/cubit/base_cubit.dart';
 import '../../../../di/di.dart';
-import '../cubit/hot_cubit.dart';
+import '../../../../domain/model/banner.dart';
+import '../../home/cubit/hot_cubit.dart';
 
 class _Constant {
-  String label = 'Có gì hot?';
+  String label = 'Tin mới nhất';
   String all = 'Tất cả';
   double heightItem = 230;
+  double widthItem = 300;
 }
 
-class HotWidget extends StatelessWidget {
-  const HotWidget({super.key});
+class LatestNews extends StatelessWidget {
+  const LatestNews({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +45,7 @@ class HotWidget extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    // context.pushNamed(AppRouteConstants.postDetailScreenRoute.name,
-                    //     queryParameters: {
-                    //       'phone': state.data.phone,
-                    //       'otp': '1111',
-                    //       'isNew': 'false',
-                    //     });
-                  },
+                  onTap: () {},
                   child: Text(
                     _Constant().all,
                     style: const TextStyle(
@@ -93,6 +88,35 @@ class HotWidget extends StatelessWidget {
                   );
                 } else {
                   context.read<HotCubit>().fetchHot();
+                  return ListView(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: NumberConstant.basePadding,
+                    ),
+                    children: [
+                      Shimmer(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: Colors.grey,
+                          ),
+                          width: _Constant().widthItem,
+                          height: _Constant().heightItem,
+                        ),
+                      ),
+                      SizedBox(width: NumberConstant.basePaddingLarge),
+                      Shimmer(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: Colors.grey,
+                          ),
+                          width: _Constant().widthItem,
+                          height: _Constant().heightItem,
+                        ),
+                      ),
+                    ],
+                  );
                   return Center(
                     child: CircularProgressIndicator(
                       color: AppColor.primary,
@@ -113,7 +137,7 @@ class HotWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-        width: 300,
+        width: _Constant().widthItem,
         child: cardWidget(
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -135,6 +159,12 @@ class HotWidget extends StatelessWidget {
                   maxLines: 2,
                   softWrap: true,
                   overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    decorationColor: Colors.white,
+                    fontWeight: FontWeight.w400
+                  ),
                 ),
               ),
             ],

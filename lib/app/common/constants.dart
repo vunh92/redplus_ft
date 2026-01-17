@@ -87,31 +87,36 @@ class Constants {
       title: 'Buk Buk',
       content: 'Buk Buk',
       imageUrl:
-'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg7Kdv7_ayzGtTYwUU129tNv3p_J5MAx6TJw&s'    ),
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg7Kdv7_ayzGtTYwUU129tNv3p_J5MAx6TJw&s',
+    ),
     BrandModel(
       id: "brand_007",
       title: 'Tasaki BBQ',
       content: 'Tasaki BBQ',
       imageUrl:
-'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtxlOi0DI2Sa46VpWDFyU37vbvZL0mHyaIdg&s'    ),
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtxlOi0DI2Sa46VpWDFyU37vbvZL0mHyaIdg&s',
+    ),
     BrandModel(
       id: "brand_008",
       title: 'Meiwei',
       content: 'Meiwei',
       imageUrl:
-'https://images.urbox.vn/_img_server/2023/11/14/640/1699933551_6552ed701947e.png'    ),
+          'https://images.urbox.vn/_img_server/2023/11/14/640/1699933551_6552ed701947e.png',
+    ),
     BrandModel(
       id: "brand_009",
       title: 'Wulao',
       content: 'Wulao',
       imageUrl:
-'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTguLIstpQtSF5U1oEoml-rEj-N9Z-rZYYHkw&s'    ),
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTguLIstpQtSF5U1oEoml-rEj-N9Z-rZYYHkw&s',
+    ),
     BrandModel(
       id: "brand_010",
       title: 'Tianxin',
       content: 'Tianxin',
       imageUrl:
-'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQegICwvOH5VlwrlcDB37XXlUHc8nztjf4DjQ&s'    ),
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQegICwvOH5VlwrlcDB37XXlUHc8nztjf4DjQ&s',
+    ),
   ];
 }
 

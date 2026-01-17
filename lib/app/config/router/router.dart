@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:redplus_ft/presentation/views/detail/post_detail_screen.dart';
 import '../../../presentation/views/auth/otp_screen.dart';
 import '../../../presentation/views/auth/sign_up_screen.dart';
 import '../../../presentation/views/auth/sign_in_screen.dart';
@@ -73,6 +74,19 @@ final router = GoRouter(
             phone: state.uri.queryParameters['phone'] ?? '',
             otp: state.uri.queryParameters['otp'] ?? '',
             isNew: state.uri.queryParameters['isNew'] == 'true',
+          ),
+        );
+      },
+    ),
+    GoRoute(
+      name: AppRouteConstants.postDetailScreenRoute.name,
+      path: AppRouteConstants.postDetailScreenRoute.path,
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          child: PostDetailScreen(
+            imageBanner: state.uri.queryParameters['imageBanner'] ?? '',
+            title: state.uri.queryParameters['title'] ?? '',
+            description: state.uri.queryParameters['description'] ?? '',
           ),
         );
       },
