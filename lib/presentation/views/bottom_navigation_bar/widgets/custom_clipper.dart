@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 
+class _Constant {
+  double heightOval = 60.0;
+}
+
 class OvalBottomClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     var path = Path();
-    path.lineTo(0, size.height - 60); // Start from top-left, go down
+    path.lineTo(0, size.height - _Constant().heightOval); // Start from top-left, go down
     path.quadraticBezierTo(
       size.width / 2,
       size.height,
       size.width,
-      size.height - 60,
+      size.height - _Constant().heightOval,
     ); // Oval curve
     path.lineTo(size.width, 0); // Go up to top-right
     path.close(); // Close the path

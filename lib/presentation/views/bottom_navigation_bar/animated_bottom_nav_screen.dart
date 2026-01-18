@@ -10,6 +10,7 @@ import '../../../di/di.dart';
 import '../account/cubit/account_cubit.dart';
 import '../home/cubit/home_cubit.dart';
 import '../home/home_screen.dart';
+import '../treatment/cubit/treatment_cubit.dart';
 import 'bloc/bottom_bar_bloc.dart';
 import 'widgets/animated_bottom_nav.dart';
 
@@ -48,7 +49,6 @@ class _AnimatedBottomNavScreenState extends State<AnimatedBottomNavScreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, appState) {
-        print(appState.user);
         if (appState.user != null) {
           context.read<BottomBarBloc>().add(
             const BottomBarClickedEvent(index: 0),
@@ -60,6 +60,7 @@ class _AnimatedBottomNavScreenState extends State<AnimatedBottomNavScreen> {
           providers: [
             BlocProvider(create: (context) => getIt<AccountCubit>()),
             BlocProvider(create: (context) => getIt<HomeCubit>()),
+            BlocProvider(create: (context) => getIt<TreatmentCubit>()),
           ],
           child: BlocConsumer<BottomBarBloc, BottomBarState>(
             listener: (context, state) {
@@ -81,7 +82,7 @@ class _AnimatedBottomNavScreenState extends State<AnimatedBottomNavScreen> {
                       key: const Key('home_screen'),
                       user: appState.user,
                     ),
-                    const TreatmentScreen(key: Key('treatment_screen')),
+                    TreatmentScreen(key: Key('treatment_screen'), user: appState.user),
                     const NotificationScreen(key: Key('notification_screen')),
                     AccountScreen(key: Key('account_screen'), user: appState.user,),
                   ],

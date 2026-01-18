@@ -167,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
           InkWell(
             onTap: () {
               context.read<BottomBarBloc>().add(
-                const BottomBarClickedEvent(index: 5),
+                const BottomBarClickedEvent(index: 3),
               );
             },
             child: Column(
