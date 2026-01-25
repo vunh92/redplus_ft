@@ -89,7 +89,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 fit: BoxFit.cover,
                 imageUrl: widget.imageBanner,
                 placeholder: (context, url) =>
-                const Center(child: CircularProgressIndicator()),
+                    const Center(child: CircularProgressIndicator()),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
@@ -102,6 +102,21 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.all(NumberConstant.basePaddingLarge),
+              child: Text(
+                widget.title,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  decorationColor: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  wordSpacing: 4,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: NumberConstant.basePaddingLarge,
+              ),
               child: Text(
                 widget.description,
                 style: TextStyle(
@@ -140,7 +155,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
               ),
             ),
             LatestNews(),
-            SizedBox(height: 40,)
+            SizedBox(height: 40),
           ],
         ),
       ),

@@ -8,8 +8,13 @@ import 'package:redplus_ft/presentation/views/treatment/treatment_screen.dart';
 import '../../../app/common/common.dart';
 import '../../../di/di.dart';
 import '../account/cubit/account_cubit.dart';
+import '../home/cubit/banner_cubit.dart';
+import '../home/cubit/deal_cubit.dart';
 import '../home/cubit/home_cubit.dart';
+import '../home/cubit/hot_cubit.dart';
 import '../home/home_screen.dart';
+import '../treatment/cubit/all_treatment_cubit.dart';
+import '../treatment/cubit/special_treatment_cubit.dart';
 import '../treatment/cubit/treatment_cubit.dart';
 import 'bloc/bottom_bar_bloc.dart';
 import 'widgets/animated_bottom_nav.dart';
@@ -60,7 +65,12 @@ class _AnimatedBottomNavScreenState extends State<AnimatedBottomNavScreen> {
           providers: [
             BlocProvider(create: (context) => getIt<AccountCubit>()),
             BlocProvider(create: (context) => getIt<HomeCubit>()),
+            BlocProvider(create: (context) => getIt<BannerCubit>()),
+            BlocProvider(create: (context) => getIt<HotCubit>()),
+            BlocProvider(create: (context) => getIt<DealCubit>()),
             BlocProvider(create: (context) => getIt<TreatmentCubit>()),
+            BlocProvider(create: (context) => getIt<AllTreatmentCubit>()),
+            BlocProvider(create: (context) => getIt<SpecialTreatmentCubit>()),
           ],
           child: BlocConsumer<BottomBarBloc, BottomBarState>(
             listener: (context, state) {

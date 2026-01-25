@@ -236,7 +236,11 @@ class _HomeScreenState extends State<HomeScreen> {
             title: 'Ưu đãi',
             color: AppColor.blue,
             icon: Icons.sell,
-            onTap: () {},
+            onTap: () {
+              context.read<BottomBarBloc>().add(
+                const BottomBarClickedEvent(index: 1),
+              );
+            },
           ),
           _iconMenuHeader(
             context,

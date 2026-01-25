@@ -9,8 +9,7 @@ class MockTreatment {
     TreatmentModel(
       id: "treatment_001",
       title:
-          'Cách Đặt Lẩu Haidilao Về Nhà Tiện Lợi | Thưởng Thức Ngay! Cách Đặt Lẩu Haidilao Về Nhà Tiện Lợi | Thưởng Thức Ngay!',
-      content:
+          'Voucher đổi điểm 50K',      content:
           'Thèm lẩu Haidilao nhưng không muốn ra ngoài? Đặt ngay lẩu Haidilao về nhà chỉ với vài thao tác đơn giản! Thưởng thức món lẩu tươi ngon, đầy đủ hương vị ngay tại không gian của bạn mà không cần phải di chuyển. Cùng haidilaovn.com khám phá thêm chi tiết dưới đây\n'
           'Một trong những lý do khiến Haidilao trở thành thương hiệu được ưa chuộng chính là sự tiện lợi trong việc đặt món. Bạn có thể dễ dàng đặt lẩu Haidilao về nhà chỉ với vài thao tác đơn giản qua ứng dụng di động hoặc website của Haidilao',
       imageUrl:
@@ -19,7 +18,8 @@ class MockTreatment {
     ),
     TreatmentModel(
       id: "treatment_002",
-      title: 'Haidilao Đà Nẵng: Địa Chỉ, ?',
+      title:
+      'Voucher đổi điểm 100K',
       content:
           'Haidilao, thương hiệu lẩu nổi tiếng từ Trung Quốc, đã gây sốt tại nhiều quốc gia và thành phố lớn. Mặc dù hiện tại chưa có chi nhánh Haidilao Đà Nẵng, nhưng sức hút của Haidilao vẫn khiến nhiều tín đồ ẩm thực nơi đây mong chờ sự xuất hiện của thương hiệu này. Cùng haidilaovn.com khám phá thêm về sự nổi bật của thương hiệu này nhé!',
       imageUrl:
@@ -28,7 +28,7 @@ class MockTreatment {
     ),
     TreatmentModel(
       id: "treatment_003",
-      title: 'Cách Đặt Bàn Haidilao Dễ Dàng & Nhanh Chóng',
+      title: 'Voucher đổi điểm 200K',
       content:
           'Nếu bạn đang tìm cách tránh phải chờ đợi lâu khi đến Haidilao, thì Cách Đặt Bàn Haidilao Và Các Tips Để Tránh Cảnh Chờ Đợi. Dưới Đây haidilaovn.com sẽ cung cấp cho bạn những thông tin hữu ích nhất để giải quyết vấn đề này nhé!\n'
           'Việc đặt bàn trước sẽ giúp bạn đảm bảo có chỗ ngồi ưng ý, tiết kiệm thời gian để thưởng thức những món lẩu thơm ngon mà không phải lo lắng về việc hết chỗ.\n'
@@ -39,7 +39,7 @@ class MockTreatment {
     ),
     TreatmentModel(
       id: "treatment_004",
-      title: 'Haidilao – Lẩu Tươi Ngon, Trội Dịch Vụ 5 Sao',
+      title: 'Voucher đổi điểm 500K',
       content:
           'Ra đời vào năm 1994 tại một quán nướng nhỏ ở Tứ Xuyên, Trung Quốc, Haidilao đã không ngừng phát triển và khẳng định mình là biểu tượng của văn hóa lẩu Trung Hoa. Từ một cửa hàng nhỏ, Haidilao đã vươn lên trở thành chuỗi nhà hàng lẩu nổi tiếng toàn cầu, với hơn 1.400 cơ sở tại 16 quốc gia trên bốn châu lục. Sự thành công này không chỉ đến từ hương vị đặc sắc của các món lẩu mà còn nhờ vào cam kết mang đến dịch vụ khách hàng xuất sắc và một không gian trải nghiệm đầy sáng tạo.\n'
           'Haidilao không chỉ là nơi để thưởng thức món lẩu nóng, mà còn là điểm đến mang đến những trải nghiệm ẩm thực độc đáo. Điều này được thể hiện rõ ràng qua sự sáng tạo không ngừng trong từng món ăn và dịch vụ, kết hợp hài hòa giữa truyền thống và hiện đại. Dù là một chuỗi nhà hàng nổi tiếng tại Trung Quốc, Haidilao cũng đã nhanh chóng chiếm lĩnh các thị trường quốc tế lớn như Singapore, Mỹ, Nhật Bản, Anh, Úc và nhiều quốc gia khác, với giá trị thương hiệu ngày càng được nâng cao.\n'

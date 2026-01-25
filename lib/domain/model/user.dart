@@ -65,7 +65,7 @@ class User extends HiveObject {
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      id: map['_id'] ?? '',
+      id: map['id'] ?? '',
       username: map['username'] ?? '',
       name: map['name'] ?? '',
       email: map['email'] ?? '',

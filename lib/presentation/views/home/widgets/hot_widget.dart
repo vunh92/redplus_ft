@@ -21,91 +21,88 @@ class HotWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<HotCubit>()..fetchHot(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: NumberConstant.basePaddingLarge,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  _Constant().label,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: NumberConstant.basePaddingLarge,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                _Constant().label,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  // context.pushNamed(AppRouteConstants.postDetailScreenRoute.name,
+                  //     queryParameters: {
+                  //       'phone': state.data.phone,
+                  //       'otp': '1111',
+                  //       'isNew': 'false',
+                  //     });
+                },
+                child: Text(
+                  _Constant().all,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 16,
+                    color: AppColor.blue,
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    // context.pushNamed(AppRouteConstants.postDetailScreenRoute.name,
-                    //     queryParameters: {
-                    //       'phone': state.data.phone,
-                    //       'otp': '1111',
-                    //       'isNew': 'false',
-                    //     });
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: _Constant().heightItem,
+          child: BlocConsumer<HotCubit, BaseState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              if (state is SuccessState<List<BannerModel>>) {
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: state.data.length,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: NumberConstant.basePadding,
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(
+                        NumberConstant.basePadding,
+                      ),
+                      child: _item(state.data[index], onTap: () {
+                        context.pushNamed(AppRouteConstants.postDetailScreenRoute.name,
+                            queryParameters: {
+                              'imageBanner': state.data[index].imageUrl,
+                              'title': state.data[index].title,
+                              'description': state.data[index].content,
+                            });
+                      }),
+                    );
                   },
-                  child: Text(
-                    _Constant().all,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: AppColor.blue,
-                    ),
+                );
+              } else {
+                context.read<HotCubit>().fetchHot();
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: AppColor.primary,
+                    backgroundColor: AppColor.primary.withAlpha(10),
+                    strokeWidth: 4,
                   ),
-                ),
-              ],
-            ),
+                );
+              }
+            },
           ),
-          SizedBox(
-            height: _Constant().heightItem,
-            child: BlocConsumer<HotCubit, BaseState>(
-              listener: (context, state) {},
-              builder: (context, state) {
-                if (state is SuccessState<List<BannerModel>>) {
-                  return ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: state.data.length,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: NumberConstant.basePadding,
-                    ),
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(
-                          NumberConstant.basePadding,
-                        ),
-                        child: _item(state.data[index], onTap: () {
-                          context.pushNamed(AppRouteConstants.postDetailScreenRoute.name,
-                              queryParameters: {
-                                'imageBanner': state.data[index].imageUrl,
-                                'title': state.data[index].title,
-                                'description': state.data[index].content,
-                              });
-                        }),
-                      );
-                    },
-                  );
-                } else {
-                  context.read<HotCubit>().fetchHot();
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: AppColor.primary,
-                      backgroundColor: AppColor.primary.withAlpha(10),
-                      strokeWidth: 4,
-                    ),
-                  );
-                }
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

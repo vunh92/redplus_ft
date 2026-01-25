@@ -28,4 +28,8 @@ class AppRouteConstants {
     name: 'post-detail-screen',
     path: '/post-detail-screen',
   );
+  static const treatmentDetailScreenRoute = AppRoute(
+    name: 'treatment-detail-screen',
+    path: '/treatment-detail-screen',
+  );
 }

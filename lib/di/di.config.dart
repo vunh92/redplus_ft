@@ -61,6 +61,10 @@ import 'package:redplus_ft/presentation/views/scan/cubit/scan_cubit.dart'
     as _i899;
 import 'package:redplus_ft/presentation/views/splash_screen/bloc/splash_cubit.dart'
     as _i568;
+import 'package:redplus_ft/presentation/views/treatment/cubit/all_treatment_cubit.dart'
+    as _i845;
+import 'package:redplus_ft/presentation/views/treatment/cubit/special_treatment_cubit.dart'
+    as _i486;
 import 'package:redplus_ft/presentation/views/treatment/cubit/treatment_cubit.dart'
     as _i819;
 
@@ -134,6 +138,10 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i819.TreatmentCubit>(
         () => _i819.TreatmentCubit(gh<_i620.TreatmentRepository>()));
+    gh.factory<_i486.SpecialTreatmentCubit>(
+        () => _i486.SpecialTreatmentCubit(gh<_i620.TreatmentRepository>()));
+    gh.factory<_i845.AllTreatmentCubit>(
+        () => _i845.AllTreatmentCubit(gh<_i620.TreatmentRepository>()));
     return this;
   }
 }

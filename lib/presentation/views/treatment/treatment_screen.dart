@@ -191,6 +191,10 @@ class _TreatmentScreenState extends State<TreatmentScreen> {
             children: [
               Spacer(),
               InkWell(
+                onTap: () async {
+                  final user = await getUserData();
+                  print(user?.toJson());
+                },
                 child: Container(
                   height: 30,
                   padding: EdgeInsets.symmetric(

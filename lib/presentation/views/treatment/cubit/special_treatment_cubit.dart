@@ -1,14 +1,15 @@
+
 import 'package:injectable/injectable.dart';
 
 import '../../../../app/cubit/base_cubit.dart';
 import '../../../../domain/repository/treatment_repository.dart';
 
-part 'treatment_state.dart';
+part 'special_treatment_state.dart';
 
 @Injectable()
-class TreatmentCubit extends BaseCubit {
+class SpecialTreatmentCubit extends BaseCubit {
   final TreatmentRepository _treatmentRepository;
-  TreatmentCubit(this._treatmentRepository) : super(TreatmentInitial());
+  SpecialTreatmentCubit(this._treatmentRepository) : super(SpecialTreatmentInitial());
 
   Future<void> fetchTreatment() async {
     try {

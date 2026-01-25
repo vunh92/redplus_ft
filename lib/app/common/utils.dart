@@ -17,7 +17,9 @@ void precatchedImage(List<String> images, BuildContext context) {
 }
 
 void precatchedImageMap(
-    List<Map<String, String>> images, BuildContext context) {
+  List<Map<String, String>> images,
+  BuildContext context,
+) {
   for (Map<String, String> image in images) {
     precacheImage(NetworkImage(image['image']!), context);
   }
@@ -44,19 +46,36 @@ String formatFolderName(String productName) {
   return formattedName;
 }
 
+String getEndDateOfYear({String format = 'dd/MM/yyyy'}) {
+  final DateTime endDateOfYear = DateTime(
+    DateTime.now().year,
+    DateTime.december,
+    31,
+    23,
+    59,
+    59,
+    999,
+    999,
+  );
+  return DateFormat(format).format(endDateOfYear);
+  ;
+}
+
 String getDeliveryDate() {
   final DateTime currentDate = DateTime.now();
   final int randomDay = Random().nextInt(15) + 1;
   final DateTime deliveryDate = currentDate.add(Duration(days: randomDay));
-  String formattedDeliveryDate =
-      DateFormat('EEEE, dd MMMM').format(deliveryDate);
+  String formattedDeliveryDate = DateFormat(
+    'EEEE, dd MMMM',
+  ).format(deliveryDate);
   return formattedDeliveryDate;
 }
 
 formatDate(int date) {
   final DateFormat formatter = DateFormat('MMMM dd, yyyy');
-  final String formattedOrderDate =
-      formatter.format(DateTime.fromMillisecondsSinceEpoch(date));
+  final String formattedOrderDate = formatter.format(
+    DateTime.fromMillisecondsSinceEpoch(date),
+  );
   return formattedOrderDate;
 }
 
@@ -163,7 +182,9 @@ Future<User?> getUserData() async {
 }
 
 bool isEmailValid(String email) {
-  return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
+  return RegExp(
+    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+  ).hasMatch(email);
 }
 
 bool checkValidPhoneNumber(String phone) {

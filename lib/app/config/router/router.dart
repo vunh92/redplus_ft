@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:redplus_ft/presentation/views/detail/post_detail_screen.dart';
+import '../../../domain/model/treatment.dart';
 import '../../../presentation/views/auth/otp_screen.dart';
 import '../../../presentation/views/auth/sign_up_screen.dart';
 import '../../../presentation/views/auth/sign_in_screen.dart';
 import '../../../presentation/views/bottom_navigation_bar/animated_bottom_nav_screen.dart';
+import '../../../presentation/views/detail/treatment_detail_screen.dart';
 import '../../../presentation/views/home/home_screen.dart';
 import '../../../presentation/views/splash_screen/splash_screen.dart';
 import 'app_route_constants.dart';
@@ -87,6 +89,18 @@ final router = GoRouter(
             imageBanner: state.uri.queryParameters['imageBanner'] ?? '',
             title: state.uri.queryParameters['title'] ?? '',
             description: state.uri.queryParameters['description'] ?? '',
+          ),
+        );
+      },
+    ),
+    GoRoute(
+      name: AppRouteConstants.treatmentDetailScreenRoute.name,
+      path: AppRouteConstants.treatmentDetailScreenRoute.path,
+      pageBuilder: (context, state) {
+        final TreatmentModel args = state.extra as TreatmentModel;
+        return MaterialPage(
+          child: TreatmentDetailScreen(
+            treatment: args,
           ),
         );
       },
