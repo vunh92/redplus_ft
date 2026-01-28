@@ -19,7 +19,8 @@ class _Constant {
 }
 
 class LatestNews extends StatelessWidget {
-  const LatestNews({super.key});
+  final String routerPath;
+  const LatestNews({super.key, required this.routerPath});
 
   @override
   Widget build(BuildContext context) {
@@ -75,14 +76,18 @@ class LatestNews extends StatelessWidget {
                         padding: const EdgeInsets.all(
                           NumberConstant.basePadding,
                         ),
-                        child: _item(state.data[index], onTap: () {
-                          context.pushNamed(AppRouteConstants.postDetailScreenRoute.name,
+                        child: _item(
+                          state.data[index],
+                          onTap: () {
+                            context.pushNamed(
+                              AppRouteConstants.postDetailScreenRoute.name,
                               queryParameters: {
-                                'imageBanner': state.data[index].imageUrl,
-                                'title': state.data[index].title,
-                                'description': state.data[index].content,
-                              });
-                        }),
+                                'routerPath': routerPath,
+                              },
+                              extra: state.data[index],
+                            );
+                          },
+                        ),
                       );
                     },
                   );
@@ -163,7 +168,7 @@ class LatestNews extends StatelessWidget {
                     color: Colors.black,
                     fontSize: 16,
                     decorationColor: Colors.white,
-                    fontWeight: FontWeight.w400
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),

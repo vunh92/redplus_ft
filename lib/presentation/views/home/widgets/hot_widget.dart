@@ -79,12 +79,14 @@ class HotWidget extends StatelessWidget {
                         NumberConstant.basePadding,
                       ),
                       child: _item(state.data[index], onTap: () {
-                        context.pushNamed(AppRouteConstants.postDetailScreenRoute.name,
-                            queryParameters: {
-                              'imageBanner': state.data[index].imageUrl,
-                              'title': state.data[index].title,
-                              'description': state.data[index].content,
-                            });
+                        context.pushNamed(
+                          AppRouteConstants.postDetailScreenRoute.name,
+                          queryParameters: {
+                            'routerPath':
+                            AppRouteConstants.bottomBarRoute.path,
+                          },
+                          extra: state.data[index],
+                        );
                       }),
                     );
                   },

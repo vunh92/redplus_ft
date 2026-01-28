@@ -1,38 +1,74 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../app/common/common.dart';
-import '../../../app/config/config.dart';
 import '../../../domain/model/banner.dart';
-import 'cubit/news_cubit.dart';
+import 'cubit/pagination_cubit.dart';
 
 class _Constant {
   String label = 'Tin tức';
   double heightItem = 200;
 }
 
-class NewsScreen extends StatefulWidget {
-  const NewsScreen({super.key});
+class PaginationScreen extends StatefulWidget {
+  const PaginationScreen({super.key});
 
   @override
-  State<NewsScreen> createState() => _NewsScreenState();
+  State<PaginationScreen> createState() => _PaginationScreenState();
 }
 
-class _NewsScreenState extends State<NewsScreen> {
+class _PaginationScreenState extends State<PaginationScreen> {
   final _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
-    context.read<NewsCubit>().fetchNews();
+    context.read<PaginationCubit>().fetchData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Paginated Pagination'),
+        backgroundColor: AppColor.primary,
+        iconTheme: IconThemeData(color: Colors.white),
+        foregroundColor: Colors.white,
+      ),
+      body: BlocBuilder<PaginationCubit, PaginationState>(
+        builder: (context, state) {
+          if (state is PaginationLoading) {
+            return Center(child: CircularProgressIndicator());
+          } else if (state is PaginationLoaded) {
+            return ListView.builder(
+              controller: _scrollController,
+              itemCount: state.items.length + (state.isLoadingMore ? 1 : 0),
+              shrinkWrap: true,
+              padding: EdgeInsets.all(NumberConstant.basePadding),
+              itemBuilder: (context, index) {
+                if (index >= state.items.length) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                return Padding(
+                  padding: const EdgeInsets.all(NumberConstant.basePaddingLarge),
+                  child: _item(state.items[index], onTap: () {}),
+                );
+              },
+            );
+          } else if (state is PaginationError) {
+            return Center(child: Text('Error: ${state.message}'));
+          }
+          return Container();
+        },
+      ),
+    );
   }
 
   void _onScroll() {
     if (_isBottom) {
-      context.read<NewsCubit>().fetchNews();
+      context.read<PaginationCubit>().fetchData();
     }
   }
 
@@ -47,58 +83,6 @@ class _NewsScreenState extends State<NewsScreen> {
   void dispose() {
     _scrollController.dispose();
     super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_Constant().label),
-        backgroundColor: AppColor.primary,
-        iconTheme: IconThemeData(color: Colors.white),
-        foregroundColor: Colors.white,
-      ),
-      body: BlocBuilder<NewsCubit, NewsState>(
-        builder: (context, state) {
-          if (state is NewsLoading) {
-            return Center(child: CircularProgressIndicator());
-          } else if (state is NewsLoaded) {
-            return ListView.builder(
-              controller: _scrollController,
-              itemCount: state.items.length + (state.isLoadingMore ? 1 : 0),
-              shrinkWrap: true,
-              padding: EdgeInsets.all(NumberConstant.basePadding),
-              itemBuilder: (context, index) {
-                if (index >= state.items.length) {
-                  return Center(child: CircularProgressIndicator());
-                }
-                return Padding(
-                  padding: const EdgeInsets.all(
-                    NumberConstant.basePaddingLarge,
-                  ),
-                  child: _item(
-                    state.items[index],
-                    onTap: () {
-                      context.pushNamed(
-                        AppRouteConstants.postDetailScreenRoute.name,
-                        queryParameters: {
-                          'routerPath':
-                          AppRouteConstants.newsScreenRoute.path,
-                        },
-                        extra: state.items[index],
-                      );
-                    },
-                  ),
-                );
-              },
-            );
-          } else if (state is NewsError) {
-            return Center(child: Text('Error: ${state.message}'));
-          }
-          return Container();
-        },
-      ),
-    );
   }
 
   Widget _item(BannerModel banner, {required Function()? onTap}) {
@@ -120,26 +104,12 @@ class _NewsScreenState extends State<NewsScreen> {
               ),
               Container(
                 padding: EdgeInsets.all(NumberConstant.basePadding),
+                height: 60,
                 child: Text(
                   banner.title,
                   maxLines: 2,
                   softWrap: true,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: AppColor.text,
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(NumberConstant.basePadding),
-                child: Text(
-                  banner.content,
-                  maxLines: 3,
-                  softWrap: true,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: AppColor.textSecondary),
                 ),
               ),
             ],

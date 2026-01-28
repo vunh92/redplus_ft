@@ -2,30 +2,23 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:redplus_ft/app/common/common.dart';
-import 'package:shimmer_animation/shimmer_animation.dart';
 
 import '../../../app/config/config.dart';
+import '../../../domain/model/banner.dart';
 import 'widgets/latest_news.dart';
 
 class PostDetailScreen extends StatefulWidget {
-  final String imageBanner;
-  final String title;
-  final String description;
+  final String routerPath;
+  final BannerModel banner;
 
   const PostDetailScreen({
     super.key,
-    required this.imageBanner,
-    required this.title,
-    required this.description,
+    required this.banner,
+    required this.routerPath,
   });
 
   @override
   State<PostDetailScreen> createState() => _PostDetailScreenState();
-}
-
-class _Constant {
-  double heightInput = 50.0;
-  int maxLengthInput = 9;
 }
 
 class _PostDetailScreenState extends State<PostDetailScreen> {
@@ -62,11 +55,12 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
         return <Widget>[
           SliverAppBar(
             title: _isSliverAppBarExpanded
-                ? Text(widget.title, style: TextStyle(color: _textColor))
+                ? Text(widget.banner.title, style: TextStyle(color: _textColor))
                 : null,
             leading: GestureDetector(
-              onTap: () =>
-                  context.goNamed(AppRouteConstants.bottomBarRoute.name),
+              onTap: () {
+                popUntilPath(context, widget.routerPath);
+              },
               child: Container(
                 decoration: BoxDecoration(
                   color: _isSliverAppBarExpanded
@@ -87,7 +81,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
             flexibleSpace: FlexibleSpaceBar(
               background: CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: widget.imageBanner,
+                imageUrl: widget.banner.imageUrl,
                 placeholder: (context, url) =>
                     const Center(child: CircularProgressIndicator()),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -103,7 +97,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
             Padding(
               padding: const EdgeInsets.all(NumberConstant.basePaddingLarge),
               child: Text(
-                widget.title,
+                widget.banner.title,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20,
@@ -118,7 +112,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 horizontal: NumberConstant.basePaddingLarge,
               ),
               child: Text(
-                widget.description,
+                widget.banner.content,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 18,
@@ -128,33 +122,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(NumberConstant.basePaddingLarge),
-              child: Text(
-                widget.description,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  decorationColor: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  wordSpacing: 4,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(NumberConstant.basePaddingLarge),
-              child: Text(
-                widget.description,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  decorationColor: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  wordSpacing: 4,
-                ),
-              ),
-            ),
-            LatestNews(),
+            LatestNews(routerPath: widget.routerPath,),
             SizedBox(height: 40),
           ],
         ),

@@ -247,7 +247,9 @@ class _HomeScreenState extends State<HomeScreen> {
             title: 'Tin tức',
             color: AppColor.orange,
             icon: Icons.rss_feed,
-            onTap: () {},
+            onTap: () {
+              context.pushNamed(AppRouteConstants.newsScreenRoute.name);
+            },
           ),
           _iconMenuHeader(
             context,

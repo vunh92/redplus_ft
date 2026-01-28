@@ -47,9 +47,7 @@ class BannerWidget extends StatelessWidget {
                   autoPlayCurve: Curves.fastOutSlowIn,
                   autoPlay: true,
                   autoPlayInterval: const Duration(seconds: 3),
-                  autoPlayAnimationDuration: const Duration(
-                    milliseconds: 800,
-                  ),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 800),
                   enlargeCenterPage: true,
                   aspectRatio: 2.0,
                   viewportFraction: 0.8,
@@ -59,12 +57,14 @@ class BannerWidget extends StatelessWidget {
                     builder: (BuildContext context) {
                       return GestureDetector(
                         onTap: () {
-                          context.pushNamed(AppRouteConstants.postDetailScreenRoute.name,
-                              queryParameters: {
-                                'imageBanner': item.imageUrl,
-                                'title': item.title,
-                                'description': item.content,
-                              });
+                          context.pushNamed(
+                            AppRouteConstants.postDetailScreenRoute.name,
+                            queryParameters: {
+                              'routerPath':
+                                  AppRouteConstants.bottomBarRoute.path,
+                            },
+                            extra: item,
+                          );
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width,

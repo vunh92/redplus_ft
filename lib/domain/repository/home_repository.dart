@@ -8,5 +8,5 @@ abstract class HomeRepository {
   Future<Either<Failure, List<BannerModel>>> fetchBanner();
   Future<Either<Failure, List<BannerModel>>> fetchHot();
   Future<Either<Failure, List<DealModel>>> fetchDeal();
-  Future<Either<Failure, bool>> fetchBrand();
+  Future<Either<Failure, List<BannerModel>>> fetchNews(int page, int limit);
 }

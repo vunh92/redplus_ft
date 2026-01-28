@@ -58,9 +58,17 @@ class HomeRepositoryImpl extends HomeRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> fetchBrand() async {
-    // final http.Response res = await _homeApi.fetchBrand();
-    final list = await loadJsonAssets('assets/jsons/brand.json');
-    return Right(true);
+  Future<Either<Failure, List<BannerModel>>> fetchNews(
+    int page,
+    int limit,
+  ) async {
+    try {
+      final http.Response res = await _homeApi.fetchNews();
+      await Future.delayed(Duration(milliseconds: 500));
+      final listBanner = MockBanner().getListNewsPaging(page, limit);
+      return Right(listBanner);
+    } catch (e) {
+      return Left(Failure(e.hashCode, e.toString()));
+    }
   }
 }

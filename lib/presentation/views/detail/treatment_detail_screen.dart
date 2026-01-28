@@ -53,6 +53,7 @@ class _TreatmentDetailScreenState extends State<TreatmentDetailScreen> {
 
   loadUser() async {
     user = await getUserData();
+    print(widget.treatment.endDate);
   }
 
   @override
@@ -182,7 +183,11 @@ class _TreatmentDetailScreenState extends State<TreatmentDetailScreen> {
                                   ),
                                 ),
                                 Text(
-                                  getEndDateOfYear(),
+                                  widget.treatment.endDate.trim() != ''
+                                      ? parseDateString(
+                                          date: widget.treatment.endDate,
+                                        )
+                                      : getEndDateOfYear(),
                                   style: TextStyle(
                                     color: AppColor.text,
                                     fontSize: 16,
@@ -411,7 +416,7 @@ class _TreatmentDetailScreenState extends State<TreatmentDetailScreen> {
                           color: AppColor.primary,
                         ),
                         Text(
-                          '${'50'}',
+                          user?.point.toString() ?? '0',
                           style: TextStyle(color: AppColor.textSecondary),
                           maxLines: 1,
                           softWrap: true,
@@ -442,7 +447,7 @@ class _TreatmentDetailScreenState extends State<TreatmentDetailScreen> {
                   ),
                 ),
                 Text(
-                  '${'50'} ${_Constant().point}',
+                  '${widget.treatment.point} ${_Constant().point}',
                   style: TextStyle(color: AppColor.textSecondary, fontSize: 16),
                 ),
               ],
@@ -461,10 +466,11 @@ class _TreatmentDetailScreenState extends State<TreatmentDetailScreen> {
                     style: TextStyle(color: AppColor.text, fontSize: 16),
                   ),
                   Text(
-                    '${'1'}',
+                    '1',
                     style: TextStyle(
                       color: AppColor.textSecondary,
                       fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
@@ -485,7 +491,7 @@ class _TreatmentDetailScreenState extends State<TreatmentDetailScreen> {
                     style: TextStyle(color: AppColor.text, fontSize: 16),
                   ),
                   Text(
-                    '${'50'} ${_Constant().point}',
+                    '${widget.treatment.point} ${_Constant().point}',
                     style: TextStyle(
                       color: AppColor.textSecondary,
                       fontSize: 16,

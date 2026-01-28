@@ -52,7 +52,7 @@ class HomeApi {
     }
   }
 
-  Future<http.Response> fetchBrand() async {
+  Future<http.Response> fetchNews() async {
     final token = await getToken();
     try {
       http.Response res = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'),

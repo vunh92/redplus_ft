@@ -29,6 +29,7 @@ import 'package:redplus_ft/data/repository/treatment_repository_impl.dart'
     as _i179;
 import 'package:redplus_ft/di/register_module.dart' as _i554;
 import 'package:redplus_ft/domain/model/account.dart' as _i513;
+import 'package:redplus_ft/domain/model/my_treatment.dart' as _i383;
 import 'package:redplus_ft/domain/model/user.dart' as _i1050;
 import 'package:redplus_ft/domain/repository/auth_repository.dart' as _i886;
 import 'package:redplus_ft/domain/repository/home_repository.dart' as _i1038;
@@ -57,6 +58,10 @@ import 'package:redplus_ft/presentation/views/home/cubit/home_cubit.dart'
     as _i930;
 import 'package:redplus_ft/presentation/views/home/cubit/hot_cubit.dart'
     as _i1045;
+import 'package:redplus_ft/presentation/views/news/cubit/news_cubit.dart'
+    as _i870;
+import 'package:redplus_ft/presentation/views/news/cubit/pagination_cubit.dart'
+    as _i302;
 import 'package:redplus_ft/presentation/views/scan/cubit/scan_cubit.dart'
     as _i899;
 import 'package:redplus_ft/presentation/views/splash_screen/bloc/splash_cubit.dart'
@@ -86,6 +91,10 @@ extension GetItInjectableX on _i174.GetIt {
     );
     await gh.factoryAsync<_i979.Box<_i513.Account>>(
       () => registerModule.accountBox,
+      preResolve: true,
+    );
+    await gh.factoryAsync<_i979.Box<_i383.MyTreatment>>(
+      () => registerModule.myTreatmentBox,
       preResolve: true,
     );
     gh.factory<_i33.AppCubit>(() => _i33.AppCubit());
@@ -118,6 +127,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i930.HomeCubit(gh<_i1038.HomeRepository>()));
     gh.factory<_i52.BannerCubit>(
         () => _i52.BannerCubit(gh<_i1038.HomeRepository>()));
+    gh.factory<_i870.NewsCubit>(
+        () => _i870.NewsCubit(gh<_i1038.HomeRepository>()));
+    gh.factory<_i302.PaginationCubit>(
+        () => _i302.PaginationCubit(gh<_i1038.HomeRepository>()));
     gh.factory<_i77.OtpRepository>(
         () => _i684.OtpRepositoryImpl(gh<_i894.OtpApi>()));
     gh.factory<_i987.OtpCubit>(() => _i987.OtpCubit(

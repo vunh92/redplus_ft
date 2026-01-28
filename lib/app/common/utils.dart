@@ -58,7 +58,11 @@ String getEndDateOfYear({String format = 'dd/MM/yyyy'}) {
     999,
   );
   return DateFormat(format).format(endDateOfYear);
-  ;
+}
+
+String parseDateString({required String date, String format = 'dd/MM/yyyy'}) {
+  final DateTime parseDate = DateTime.parse(date);
+  return DateFormat(format).format(parseDate);
 }
 
 String getDeliveryDate() {

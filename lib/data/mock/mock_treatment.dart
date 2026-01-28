@@ -8,23 +8,24 @@ class MockTreatment {
   List<TreatmentModel> mockListTreatment = [
     TreatmentModel(
       id: "treatment_001",
-      title:
-          'Voucher đổi điểm 50K',      content:
+      title: 'Voucher đổi điểm 50K',
+      content:
           'Thèm lẩu Haidilao nhưng không muốn ra ngoài? Đặt ngay lẩu Haidilao về nhà chỉ với vài thao tác đơn giản! Thưởng thức món lẩu tươi ngon, đầy đủ hương vị ngay tại không gian của bạn mà không cần phải di chuyển. Cùng haidilaovn.com khám phá thêm chi tiết dưới đây\n'
           'Một trong những lý do khiến Haidilao trở thành thương hiệu được ưa chuộng chính là sự tiện lợi trong việc đặt món. Bạn có thể dễ dàng đặt lẩu Haidilao về nhà chỉ với vài thao tác đơn giản qua ứng dụng di động hoặc website của Haidilao',
       imageUrl:
           'https://metrotech.vn/wp-content/uploads/2022/09/Sale50k711x400.jpg',
       point: 50,
+      endDate: '2027-12-31 00:00:00',
     ),
     TreatmentModel(
       id: "treatment_002",
-      title:
-      'Voucher đổi điểm 100K',
+      title: 'Voucher đổi điểm 100K',
       content:
           'Haidilao, thương hiệu lẩu nổi tiếng từ Trung Quốc, đã gây sốt tại nhiều quốc gia và thành phố lớn. Mặc dù hiện tại chưa có chi nhánh Haidilao Đà Nẵng, nhưng sức hút của Haidilao vẫn khiến nhiều tín đồ ẩm thực nơi đây mong chờ sự xuất hiện của thương hiệu này. Cùng haidilaovn.com khám phá thêm về sự nổi bật của thương hiệu này nhé!',
       imageUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs3E05AKw3igU7Fhr7kdml96oLEdMcSpS_dg&s',
       point: 100,
+      endDate: '2027-12-31 00:00:00',
     ),
     TreatmentModel(
       id: "treatment_003",
@@ -36,6 +37,7 @@ class MockTreatment {
       imageUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDKAZvf0bIUrspL3088cEtZhgCYxjXaWEpmg&s',
       point: 200,
+      endDate: '2027-12-31 00:00:00',
     ),
     TreatmentModel(
       id: "treatment_004",
@@ -49,6 +51,7 @@ class MockTreatment {
       imageUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJWmD2ipdbIFAhoqWIz5olBJJkrBez0a5z4w&s',
       point: 500,
+      endDate: '2026-12-31 00:00:00'
     ),
     TreatmentModel(
       id: "treatment_005",
