@@ -40,4 +40,12 @@ class AppRouteConstants {
     name: 'news-detail-screen',
     path: '/news-detail-screen',
   );
+  static const searchBrandScreenRoute = AppRoute(
+    name: 'search-brand-screen',
+    path: '/search-brand-screen',
+  );
+  static const selectBrandScreenRoute = AppRoute(
+    name: 'select-brand-screen',
+    path: '/select-brand-screen',
+  );
 }

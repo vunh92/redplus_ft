@@ -64,6 +64,10 @@ import 'package:redplus_ft/presentation/views/news/cubit/pagination_cubit.dart'
     as _i302;
 import 'package:redplus_ft/presentation/views/scan/cubit/scan_cubit.dart'
     as _i899;
+import 'package:redplus_ft/presentation/views/search/cubit/search_brand_cubit.dart'
+    as _i736;
+import 'package:redplus_ft/presentation/views/search/cubit/select_brand_cubit.dart'
+    as _i739;
 import 'package:redplus_ft/presentation/views/splash_screen/bloc/splash_cubit.dart'
     as _i568;
 import 'package:redplus_ft/presentation/views/treatment/cubit/all_treatment_cubit.dart'
@@ -103,9 +107,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i923.SignUpApi>(() => _i923.SignUpApi());
     gh.factory<_i4.OtpTimerCubit>(() => _i4.OtpTimerCubit());
     gh.factory<_i899.ScanCubit>(() => _i899.ScanCubit());
+    gh.factory<_i739.SelectBrandCubit>(() => _i739.SelectBrandCubit());
     gh.factory<_i568.SplashCubit>(() => _i568.SplashCubit());
     gh.factory<_i1040.AccountCubit>(() => _i1040.AccountCubit());
     gh.factory<_i921.BottomBarBloc>(() => _i921.BottomBarBloc());
+    gh.factory<_i736.SearchBrandCubit>(() => _i736.SearchBrandCubit());
     gh.lazySingleton<_i615.AuthApi>(() => _i615.AuthApi());
     gh.lazySingleton<_i445.HomeApi>(() => _i445.HomeApi());
     gh.lazySingleton<_i34.TreatmentApi>(() => _i34.TreatmentApi());
@@ -149,12 +155,12 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i615.AuthApi>(),
           gh<_i979.Box<_i513.Account>>(),
         ));
-    gh.factory<_i819.TreatmentCubit>(
-        () => _i819.TreatmentCubit(gh<_i620.TreatmentRepository>()));
     gh.factory<_i486.SpecialTreatmentCubit>(
         () => _i486.SpecialTreatmentCubit(gh<_i620.TreatmentRepository>()));
     gh.factory<_i845.AllTreatmentCubit>(
         () => _i845.AllTreatmentCubit(gh<_i620.TreatmentRepository>()));
+    gh.factory<_i819.TreatmentCubit>(
+        () => _i819.TreatmentCubit(gh<_i620.TreatmentRepository>()));
     return this;
   }
 }

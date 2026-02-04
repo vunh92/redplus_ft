@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app needs access to your location for a specific feature (e.g., finding nearby services).</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>This app needs continuous location access to provide location-aware features even when closed.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>This app needs continuous location access to provide location-aware features.</string>
 </dict>
 </plist>

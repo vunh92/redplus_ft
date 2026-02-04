@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:redplus_ft/app/common/common.dart';
 import 'package:redplus_ft/domain/model/brand.dart';
+
+import '../../../../app/config/router/app_route_constants.dart';
 
 class _Constant {
   String label = 'Thương hiệu';
@@ -34,7 +37,11 @@ class BrandWidget extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  context.pushNamed(
+                    AppRouteConstants.searchBrandScreenRoute.name,
+                  );
+                },
                 child: Text(
                   _Constant().all,
                   style: const TextStyle(
@@ -57,9 +64,7 @@ class BrandWidget extends StatelessWidget {
             ),
             itemBuilder: (BuildContext context, int index) {
               return Padding(
-                padding: const EdgeInsets.all(
-                  NumberConstant.basePadding,
-                ),
+                padding: const EdgeInsets.all(NumberConstant.basePadding),
                 child: _item(Constants.listBrand[index], onTap: () {}),
               );
             },
@@ -82,7 +87,7 @@ class BrandWidget extends StatelessWidget {
             fit: BoxFit.cover,
             imageUrl: brand.imageUrl,
             placeholder: (context, url) =>
-            const Center(child: CircularProgressIndicator()),
+                const Center(child: CircularProgressIndicator()),
             errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
         ),

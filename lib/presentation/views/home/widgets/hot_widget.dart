@@ -7,7 +7,6 @@ import 'package:redplus_ft/app/cubit/base_cubit.dart';
 import 'package:redplus_ft/domain/model/banner.dart';
 
 import '../../../../app/config/config.dart';
-import '../../../../di/di.dart';
 import '../cubit/hot_cubit.dart';
 
 class _Constant {
@@ -42,12 +41,7 @@ class HotWidget extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  // context.pushNamed(AppRouteConstants.postDetailScreenRoute.name,
-                  //     queryParameters: {
-                  //       'phone': state.data.phone,
-                  //       'otp': '1111',
-                  //       'isNew': 'false',
-                  //     });
+                  context.pushNamed(AppRouteConstants.newsScreenRoute.name);
                 },
                 child: Text(
                   _Constant().all,

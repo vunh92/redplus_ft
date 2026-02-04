@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:redplus_ft/domain/model/brand.dart';
 import 'package:redplus_ft/presentation/views/detail/post_detail_screen.dart';
 import '../../../domain/model/banner.dart';
 import '../../../domain/model/treatment.dart';
@@ -10,6 +11,8 @@ import '../../../presentation/views/bottom_navigation_bar/animated_bottom_nav_sc
 import '../../../presentation/views/detail/treatment_detail_screen.dart';
 import '../../../presentation/views/home/home_screen.dart';
 import '../../../presentation/views/news/news_screen.dart';
+import '../../../presentation/views/search/search_brand_screen.dart';
+import '../../../presentation/views/search/select_brand_screen.dart';
 import '../../../presentation/views/splash_screen/splash_screen.dart';
 import 'app_route_constants.dart';
 
@@ -115,12 +118,31 @@ final router = GoRouter(
         );
       },
     ),
+    GoRoute(
+      name: AppRouteConstants.searchBrandScreenRoute.name,
+      path: AppRouteConstants.searchBrandScreenRoute.path,
+      pageBuilder: (context, state) {
+        return MaterialPage(child: SearchBrandScreen());
+      },
+    ),
+    GoRoute(
+      name: AppRouteConstants.selectBrandScreenRoute.name,
+      path: AppRouteConstants.selectBrandScreenRoute.path,
+      pageBuilder: (context, state) {
+        final List<BrandModel> args = state.extra as List<BrandModel>;
+        return MaterialPage(child: SelectBrandScreen(listBrand: args));
+      },
+    ),
   ],
 );
 
 void popUntilPath(BuildContext context, String routePath) {
-  while (
-  router.routerDelegate.currentConfiguration.matches.last.matchedLocation !=
+  while (router
+          .routerDelegate
+          .currentConfiguration
+          .matches
+          .last
+          .matchedLocation !=
       routePath) {
     if (!context.canPop()) {
       return;

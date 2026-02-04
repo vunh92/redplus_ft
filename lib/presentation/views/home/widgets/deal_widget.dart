@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:redplus_ft/app/common/common.dart';
 import 'package:redplus_ft/app/cubit/base_cubit.dart';
 import 'package:redplus_ft/domain/model/deal.dart';
 
-import '../../../../di/di.dart';
+import '../../../../app/config/config.dart';
 import '../cubit/deal_cubit.dart';
 
 class _Constant {
@@ -39,7 +40,9 @@ class DealWidget extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  context.pushNamed(AppRouteConstants.newsScreenRoute.name);
+                },
                 child: Text(
                   _Constant().all,
                   style: const TextStyle(

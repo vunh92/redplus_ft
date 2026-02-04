@@ -1,4 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Required for precise location (GPS, WiFi, etc.) -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Required for approximate location (cell tower, WiFi) -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Required for background location on Android 10 (API level 29) and higher -->
+    <!-- The user must also accept the foreground permission first -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+    <!-- If you plan to use location in a foreground service (e.g., tracking in background) -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <application
         android:label="redplus_ft"
         android:name="${applicationName}"
