@@ -3,7 +3,9 @@ import 'package:uuid/uuid.dart';
 
 import '../../domain/model/account.dart';
 import '../../domain/model/brand.dart';
+import '../../domain/model/district.dart';
 import '../../domain/model/user.dart';
+import '../../presentation/views/search/select_district_screen.dart';
 
 class KeyConstant {
   static const String authToken = "x-auth-token";
@@ -117,6 +119,20 @@ class Constants {
       imageUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQegICwvOH5VlwrlcDB37XXlUHc8nztjf4DjQ&s',
     ),
+  ];
+
+  static List<DistrictModel> listDistrict = [
+    DistrictModel(code: "district_001", label: 'Bạc Liêu'),
+    DistrictModel(code: "district_002", label: 'Bình Dương'),
+    DistrictModel(code: "district_003", label: 'Cà Mau'),
+    DistrictModel(code: "district_004", label: 'Cần Thơ'),
+    DistrictModel(code: "district_005", label: 'Đà Nẵng'),
+    DistrictModel(code: "district_006", label: 'Hà Nội'),
+    DistrictModel(code: "district_007", label: 'Hồ Chí Minh'),
+    DistrictModel(code: "district_008", label: 'Thái Nguyên'),
+    DistrictModel(code: "district_009", label: 'Tiền Giang'),
+    DistrictModel(code: "district_010", label: 'Toàn quốc'),
+    DistrictModel(code: "district_011", label: 'Vũng Tàu'),
   ];
 }
 

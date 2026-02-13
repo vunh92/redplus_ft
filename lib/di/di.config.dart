@@ -15,12 +15,15 @@ import 'package:redplus_ft/app/cubit/app_cubit.dart' as _i33;
 import 'package:redplus_ft/data/network/auth_api.dart' as _i615;
 import 'package:redplus_ft/data/network/home_api.dart' as _i445;
 import 'package:redplus_ft/data/network/otp_api.dart' as _i894;
+import 'package:redplus_ft/data/network/search_api.dart' as _i174;
 import 'package:redplus_ft/data/network/sign_in_api.dart' as _i190;
 import 'package:redplus_ft/data/network/sign_up_api.dart' as _i923;
 import 'package:redplus_ft/data/network/treatment_api.dart' as _i34;
 import 'package:redplus_ft/data/repository/auth_repository_impl.dart' as _i38;
 import 'package:redplus_ft/data/repository/home_repository_impl.dart' as _i373;
 import 'package:redplus_ft/data/repository/otp_repository_impl.dart' as _i684;
+import 'package:redplus_ft/data/repository/search_repository_impl.dart'
+    as _i907;
 import 'package:redplus_ft/data/repository/sign_in_repository_impl.dart'
     as _i42;
 import 'package:redplus_ft/data/repository/sign_up_repository_impl.dart'
@@ -34,6 +37,7 @@ import 'package:redplus_ft/domain/model/user.dart' as _i1050;
 import 'package:redplus_ft/domain/repository/auth_repository.dart' as _i886;
 import 'package:redplus_ft/domain/repository/home_repository.dart' as _i1038;
 import 'package:redplus_ft/domain/repository/otp_repository.dart' as _i77;
+import 'package:redplus_ft/domain/repository/search_repository.dart' as _i369;
 import 'package:redplus_ft/domain/repository/sign_in_repository.dart' as _i492;
 import 'package:redplus_ft/domain/repository/sign_up_repository.dart' as _i934;
 import 'package:redplus_ft/domain/repository/treatment_repository.dart'
@@ -64,10 +68,14 @@ import 'package:redplus_ft/presentation/views/news/cubit/pagination_cubit.dart'
     as _i302;
 import 'package:redplus_ft/presentation/views/scan/cubit/scan_cubit.dart'
     as _i899;
+import 'package:redplus_ft/presentation/views/search/cubit/brand_detail_cubit.dart'
+    as _i966;
 import 'package:redplus_ft/presentation/views/search/cubit/search_brand_cubit.dart'
     as _i736;
 import 'package:redplus_ft/presentation/views/search/cubit/select_brand_cubit.dart'
     as _i739;
+import 'package:redplus_ft/presentation/views/search/cubit/select_district_cubit.dart'
+    as _i643;
 import 'package:redplus_ft/presentation/views/splash_screen/bloc/splash_cubit.dart'
     as _i568;
 import 'package:redplus_ft/presentation/views/treatment/cubit/all_treatment_cubit.dart'
@@ -112,13 +120,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1040.AccountCubit>(() => _i1040.AccountCubit());
     gh.factory<_i921.BottomBarBloc>(() => _i921.BottomBarBloc());
     gh.factory<_i736.SearchBrandCubit>(() => _i736.SearchBrandCubit());
+    gh.factory<_i643.SelectDistrictCubit>(() => _i643.SelectDistrictCubit());
     gh.lazySingleton<_i615.AuthApi>(() => _i615.AuthApi());
     gh.lazySingleton<_i445.HomeApi>(() => _i445.HomeApi());
     gh.lazySingleton<_i34.TreatmentApi>(() => _i34.TreatmentApi());
+    gh.lazySingleton<_i174.SearchApi>(() => _i174.SearchApi());
     gh.factory<_i492.SignInRepository>(() => _i42.SignInRepositoryImpl(
           gh<_i190.SignInApi>(),
           gh<_i979.Box<_i1050.User>>(),
         ));
+    gh.factory<_i369.SearchRepository>(
+        () => _i907.SearchRepositoryImpl(gh<_i174.SearchApi>()));
     gh.factory<_i934.SignUpRepository>(() => _i1001.SignUpRepositoryImpl(
           gh<_i923.SignUpApi>(),
           gh<_i979.Box<_i513.Account>>(),
@@ -155,6 +167,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i615.AuthApi>(),
           gh<_i979.Box<_i513.Account>>(),
         ));
+    gh.factory<_i966.BrandDetailCubit>(
+        () => _i966.BrandDetailCubit(gh<_i369.SearchRepository>()));
     gh.factory<_i486.SpecialTreatmentCubit>(
         () => _i486.SpecialTreatmentCubit(gh<_i620.TreatmentRepository>()));
     gh.factory<_i845.AllTreatmentCubit>(

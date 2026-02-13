@@ -48,4 +48,12 @@ class AppRouteConstants {
     name: 'select-brand-screen',
     path: '/select-brand-screen',
   );
+  static const selectDistrictScreenRoute = AppRoute(
+    name: 'select-district-screen',
+    path: '/select-district-screen',
+  );
+  static const brandDetailScreenRoute = AppRoute(
+    name: 'brand-detail-screen',
+    path: '/brand-detail-screen',
+  );
 }

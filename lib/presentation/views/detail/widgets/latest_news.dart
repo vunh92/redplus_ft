@@ -46,7 +46,11 @@ class LatestNews extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    context.pushNamed(
+                      AppRouteConstants.newsScreenRoute.name,
+                    );
+                  },
                   child: Text(
                     _Constant().all,
                     style: const TextStyle(

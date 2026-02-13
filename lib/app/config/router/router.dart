@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:redplus_ft/domain/model/brand.dart';
+import 'package:redplus_ft/domain/model/brand_detail.dart';
 import 'package:redplus_ft/presentation/views/detail/post_detail_screen.dart';
 import '../../../domain/model/banner.dart';
+import '../../../domain/model/district.dart';
 import '../../../domain/model/treatment.dart';
 import '../../../presentation/views/auth/otp_screen.dart';
 import '../../../presentation/views/auth/sign_up_screen.dart';
@@ -11,8 +13,10 @@ import '../../../presentation/views/bottom_navigation_bar/animated_bottom_nav_sc
 import '../../../presentation/views/detail/treatment_detail_screen.dart';
 import '../../../presentation/views/home/home_screen.dart';
 import '../../../presentation/views/news/news_screen.dart';
+import '../../../presentation/views/search/brand_detail_screen.dart';
 import '../../../presentation/views/search/search_brand_screen.dart';
 import '../../../presentation/views/search/select_brand_screen.dart';
+import '../../../presentation/views/search/select_district_screen.dart';
 import '../../../presentation/views/splash_screen/splash_screen.dart';
 import 'app_route_constants.dart';
 
@@ -122,7 +126,10 @@ final router = GoRouter(
       name: AppRouteConstants.searchBrandScreenRoute.name,
       path: AppRouteConstants.searchBrandScreenRoute.path,
       pageBuilder: (context, state) {
-        return MaterialPage(child: SearchBrandScreen());
+        final BrandModel? args = state.extra != null
+            ? state.extra as BrandModel
+            : null;
+        return MaterialPage(child: SearchBrandScreen(brandModel: args));
       },
     ),
     GoRoute(
@@ -131,6 +138,22 @@ final router = GoRouter(
       pageBuilder: (context, state) {
         final List<BrandModel> args = state.extra as List<BrandModel>;
         return MaterialPage(child: SelectBrandScreen(listBrand: args));
+      },
+    ),
+    GoRoute(
+      name: AppRouteConstants.selectDistrictScreenRoute.name,
+      path: AppRouteConstants.selectDistrictScreenRoute.path,
+      pageBuilder: (context, state) {
+        final List<DistrictModel> args = state.extra as List<DistrictModel>;
+        return MaterialPage(child: SelectDistrictScreen(listDistrict: args));
+      },
+    ),
+    GoRoute(
+      name: AppRouteConstants.brandDetailScreenRoute.name,
+      path: AppRouteConstants.brandDetailScreenRoute.path,
+      pageBuilder: (context, state) {
+        final BrandDetailModel args = state.extra as BrandDetailModel;
+        return MaterialPage(child: BrandDetailScreen(brandDetail: args));
       },
     ),
   ],

@@ -39,6 +39,11 @@ class BannerWidget extends StatelessWidget {
                 ),
               );
             }
+            if (state is ErrorState) {
+              return Center(
+                child: Text(state.message),
+              );
+            }
             if (state is SuccessState) {
               final data = state.data as List<BannerModel>;
               return CarouselSlider(

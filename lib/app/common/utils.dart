@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:redplus_ft/domain/model/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'constants.dart';
 
@@ -170,7 +171,7 @@ int getUniqueRandomInt({required max}) {
 Future<String> getToken() async {
   SharedPreferences pref = await SharedPreferences.getInstance();
 
-  String token = pref.getString(KeyConstant.authToken)!;
+  String token = pref.getString(KeyConstant.authToken) ?? '';
 
   return token;
 }
@@ -195,4 +196,15 @@ bool checkValidPhoneNumber(String phone) {
   const patent =
       r'^(?:\+84|0|84)?(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$';
   return RegExp(patent).hasMatch(phone.split(' ').join());
+}
+
+void openGoogleMaps({required double latitude, required double longitude}) async {
+  String googleUrl = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+  final Uri uri = Uri.parse(googleUrl);
+
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri);
+  } else {
+    throw 'Could not launch $googleUrl';
+  }
 }

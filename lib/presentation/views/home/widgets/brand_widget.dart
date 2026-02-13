@@ -65,7 +65,12 @@ class BrandWidget extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return Padding(
                 padding: const EdgeInsets.all(NumberConstant.basePadding),
-                child: _item(Constants.listBrand[index], onTap: () {}),
+                child: _item(Constants.listBrand[index], onTap: () {
+                  context.pushNamed(
+                    AppRouteConstants.searchBrandScreenRoute.name,
+                    extra: Constants.listBrand[index],
+                  );
+                }),
               );
             },
           ),

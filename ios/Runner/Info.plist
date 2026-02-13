@@ -51,5 +51,14 @@
     <string>This app needs continuous location access to provide location-aware features even when closed.</string>
     <key>NSLocationAlwaysUsageDescription</key>
     <string>This app needs continuous location access to provide location-aware features.</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>http</string>
+        <string>https</string>
+        <string>mailto</string>
+        <string>tel</string>
+        <string>sms</string>
+        <!-- Add other schemes if necessary, e.g., googlechrome, googlesearch -->
+    </array>
 </dict>
 </plist>

@@ -1,4 +1,3 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../app/cubit/base_cubit.dart';
@@ -15,7 +14,6 @@ class BannerCubit extends BaseCubit {
     try {
       emit(LoadingState());
       final either = await _homeRepository.fetchBanner();
-      await Future.delayed(Duration(milliseconds: 500));
       either.fold(
         (failure) {
           emit(ErrorState(failure.message));

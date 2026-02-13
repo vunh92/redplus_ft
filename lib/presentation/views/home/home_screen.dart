@@ -5,6 +5,7 @@ import 'package:redplus_ft/app/cubit/base_cubit.dart';
 import 'package:redplus_ft/presentation/views/home/cubit/home_cubit.dart';
 import 'package:redplus_ft/presentation/views/home/widgets/brand_widget.dart';
 import 'package:redplus_ft/presentation/views/home/widgets/deal_widget.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../app/common/common.dart';
 import '../../../app/config/config.dart';
@@ -229,7 +230,11 @@ class _HomeScreenState extends State<HomeScreen> {
             title: 'Nhà hàng',
             color: AppColor.green,
             icon: Icons.location_on,
-            onTap: () {},
+            onTap: () {
+              context.pushNamed(
+                AppRouteConstants.searchBrandScreenRoute.name,
+              );
+            },
           ),
           _iconMenuHeader(
             context,
@@ -256,7 +261,9 @@ class _HomeScreenState extends State<HomeScreen> {
             title: 'Hotline',
             color: AppColor.red,
             icon: Icons.phone,
-            onTap: () {},
+            onTap: () {
+              launchUrlString("tel://190012345}");
+            },
           ),
         ],
       ),
