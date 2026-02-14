@@ -32,6 +32,10 @@ class AppRouteConstants {
     name: 'treatment-detail-screen',
     path: '/treatment-detail-screen',
   );
+  static const myTreatmentScreenRoute = AppRoute(
+    name: 'my-treatment-screen',
+    path: '/my-treatment-screen',
+  );
   static const newsScreenRoute = AppRoute(
     name: 'news-screen',
     path: '/news-screen',

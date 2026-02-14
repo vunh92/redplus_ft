@@ -38,4 +38,23 @@ class TreatmentRepositoryImpl extends TreatmentRepository {
     }
   }
 
+  @override
+  Future<Either<Failure, bool>> redeemTreatment({
+    required int userPoint,
+    required TreatmentModel treatment,
+  }) async {
+    try {
+      final http.Response res = await _treatmentApi.redeemTreatment(
+        userPoint: userPoint,
+        pointRedeem: treatment.point,
+      );
+      await Future.delayed(Duration(milliseconds: 300));
+      if (res.statusCode != 200) {
+        return Left(Failure(res.statusCode, res.body));
+      }
+      return Right(userPoint >= treatment.point);
+    } catch (e) {
+      return Left(Failure(e.hashCode, e.toString()));
+    }
+  }
 }

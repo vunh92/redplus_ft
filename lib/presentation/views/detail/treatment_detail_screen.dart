@@ -1,12 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:redplus_ft/app/common/common.dart';
+import 'package:redplus_ft/app/cubit/base_cubit.dart';
+import 'package:redplus_ft/di/di.dart';
 import 'package:redplus_ft/presentation/widgets/custom_elevated_button.dart';
 
 import '../../../app/config/config.dart';
 import '../../../domain/model/treatment.dart';
 import '../../../domain/model/user.dart';
+import '../../widgets/custom_dialog.dart';
+import 'cubit/treatment_detail_cubit.dart';
 
 class TreatmentDetailScreen extends StatefulWidget {
   final TreatmentModel treatment;
@@ -53,7 +58,6 @@ class _TreatmentDetailScreenState extends State<TreatmentDetailScreen> {
 
   loadUser() async {
     user = await getUserData();
-    print(widget.treatment.endDate);
   }
 
   @override
@@ -69,9 +73,9 @@ class _TreatmentDetailScreenState extends State<TreatmentDetailScreen> {
           SliverAppBar(
             title: _isSliverAppBarExpanded
                 ? Text(
-                    widget.treatment.title,
-                    style: TextStyle(color: _textColor),
-                  )
+              widget.treatment.title,
+              style: TextStyle(color: _textColor),
+            )
                 : null,
             leading: GestureDetector(
               onTap: () =>
@@ -93,7 +97,7 @@ class _TreatmentDetailScreenState extends State<TreatmentDetailScreen> {
             titleTextStyle: TextStyle(color: Colors.white, fontSize: 22),
             toolbarTextStyle: TextStyle(color: Colors.white, fontSize: 22),
             expandedHeight:
-                kExpandedHeight +
+            kExpandedHeight +
                 _Constant().heightHeader * 0.5 -
                 NumberConstant.basePadding,
             flexibleSpace: FlexibleSpaceBar(
@@ -103,11 +107,13 @@ class _TreatmentDetailScreenState extends State<TreatmentDetailScreen> {
                   children: [
                     CachedNetworkImage(
                       fit: BoxFit.cover,
+                      height: kExpandedHeight + _Constant().heightHeader,
+                      width: double.infinity,
                       imageUrl: widget.treatment.imageUrl,
                       placeholder: (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
+                      const Center(child: CircularProgressIndicator()),
                       errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                      const Icon(Icons.error),
                     ),
                     Positioned(
                       bottom: 0,
@@ -151,7 +157,8 @@ class _TreatmentDetailScreenState extends State<TreatmentDetailScreen> {
                                   ),
                                 ),
                                 Text(
-                                  '${widget.treatment.point} ${_Constant().point}',
+                                  '${widget.treatment.point} ${_Constant()
+                                      .point}',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 16,
@@ -185,8 +192,8 @@ class _TreatmentDetailScreenState extends State<TreatmentDetailScreen> {
                                 Text(
                                   widget.treatment.endDate.trim() != ''
                                       ? parseDateString(
-                                          date: widget.treatment.endDate,
-                                        )
+                                    date: widget.treatment.endDate,
+                                  )
                                       : getEndDateOfYear(),
                                   style: TextStyle(
                                     color: AppColor.text,
@@ -346,168 +353,204 @@ class _TreatmentDetailScreenState extends State<TreatmentDetailScreen> {
   }
 
   _bottomSheet(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.only(
-          left: NumberConstant.basePaddingLarge,
-          right: NumberConstant.basePaddingLarge,
-          top: NumberConstant.basePaddingLarge,
-        ),
-        child: Wrap(
-          spacing: 30,
-          children: [
-            Padding(
+    return BlocProvider(
+      create: (context) => getIt<TreatmentDetailCubit>(),
+      child: BlocConsumer<TreatmentDetailCubit, BaseState>(
+        listener: (context, state) {
+          dismissDialog(context);
+          if (state is ErrorState) {
+            CustomDialog().showMessagePopUp(
+              context: context,
+              message: state.message,
+            );
+          }
+          if (state is SuccessState) {
+            Navigator.pop(context);
+            context.pushReplacementNamed(
+              AppRouteConstants.myTreatmentScreenRoute.name,
+            );
+          }
+          if (state is LoadingState) {
+            showLoadingPopUp(context);
+          }
+        },
+        builder: (context, state) {
+          return SafeArea(
+            child: Padding(
               padding: const EdgeInsets.only(
-                bottom: NumberConstant.basePadding,
+                left: NumberConstant.basePaddingLarge,
+                right: NumberConstant.basePaddingLarge,
+                top: NumberConstant.basePaddingLarge,
               ),
-              child: Stack(
+              child: Wrap(
+                spacing: 30,
                 children: [
-                  InkWell(
-                    onTap: () => Navigator.pop(context),
-                    child: Icon(
-                      Icons.close,
-                      color: AppColor.textSecondary,
-                      size: 30,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: NumberConstant.basePadding,
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        _Constant().redeemTreatment,
-                        style: TextStyle(
-                          color: AppColor.text,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Divider(color: AppColor.disable),
-            Container(
-              padding: EdgeInsets.symmetric(
-                vertical: NumberConstant.basePadding,
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    _Constant().yourPoint,
-                    style: TextStyle(color: AppColor.text, fontSize: 16),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(NumberConstant.basePadding),
-                    decoration: BoxDecoration(
-                      color: AppColor.disable,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      spacing: NumberConstant.basePadding,
+                    child: Stack(
                       children: [
-                        Icon(
-                          Icons.monetization_on,
-                          size: 20,
-                          color: AppColor.primary,
+                        InkWell(
+                          onTap: () => Navigator.pop(context),
+                          child: Icon(
+                            Icons.close,
+                            color: AppColor.textSecondary,
+                            size: 30,
+                          ),
                         ),
-                        Text(
-                          user?.point.toString() ?? '0',
-                          style: TextStyle(color: AppColor.textSecondary),
-                          maxLines: 1,
-                          softWrap: true,
-                          overflow: TextOverflow.ellipsis,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              _Constant().redeemTreatment,
+                              style: TextStyle(
+                                color: AppColor.text,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
+                  Divider(color: AppColor.disable),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: NumberConstant.basePadding,
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          _Constant().yourPoint,
+                          style: TextStyle(color: AppColor.text, fontSize: 16),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(NumberConstant.basePadding),
+                          decoration: BoxDecoration(
+                            color: AppColor.disable,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            spacing: NumberConstant.basePadding,
+                            children: [
+                              Icon(
+                                Icons.monetization_on,
+                                size: 20,
+                                color: AppColor.primary,
+                              ),
+                              Text(
+                                user?.point.toString() ?? '0',
+                                style: TextStyle(color: AppColor.textSecondary),
+                                maxLines: 1,
+                                softWrap: true,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(color: AppColor.disable),
+                  Row(
+                    spacing: NumberConstant.basePaddingLarge,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          widget.treatment.title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: AppColor.text,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        '${widget.treatment.point} ${_Constant().point}',
+                        style: TextStyle(
+                          color: AppColor.textSecondary,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Row(
+                      spacing: NumberConstant.basePaddingLarge,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          _Constant().quantity,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: AppColor.text, fontSize: 16),
+                        ),
+                        Text(
+                          '1',
+                          style: TextStyle(
+                            color: AppColor.textSecondary,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(color: AppColor.disable),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Row(
+                      spacing: NumberConstant.basePaddingLarge,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          _Constant().total,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: AppColor.text, fontSize: 16),
+                        ),
+                        Text(
+                          '${widget.treatment.point} ${_Constant().point}',
+                          style: TextStyle(
+                            color: AppColor.textSecondary,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  CustomElevatedButton(
+                    buttonText: _Constant().confirm,
+                    color: AppColor.green,
+                    onPressed: () =>
+                    {
+                      if (user != null)
+                        {
+                          context.read<TreatmentDetailCubit>().confirm(
+                            user: user!,
+                            treatment: widget.treatment,
+                          ),
+                        },
+                    },
+                  ),
                 ],
               ),
             ),
-            Divider(color: AppColor.disable),
-            Row(
-              spacing: NumberConstant.basePaddingLarge,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: Text(
-                    widget.treatment.title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: AppColor.text,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Text(
-                  '${widget.treatment.point} ${_Constant().point}',
-                  style: TextStyle(color: AppColor.textSecondary, fontSize: 16),
-                ),
-              ],
-            ),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Row(
-                spacing: NumberConstant.basePaddingLarge,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    _Constant().quantity,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: AppColor.text, fontSize: 16),
-                  ),
-                  Text(
-                    '1',
-                    style: TextStyle(
-                      color: AppColor.textSecondary,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Divider(color: AppColor.disable),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Row(
-                spacing: NumberConstant.basePaddingLarge,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    _Constant().total,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: AppColor.text, fontSize: 16),
-                  ),
-                  Text(
-                    '${widget.treatment.point} ${_Constant().point}',
-                    style: TextStyle(
-                      color: AppColor.textSecondary,
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            // Add more widgets as needed
-            CustomElevatedButton(
-              buttonText: _Constant().confirm,
-              color: AppColor.green,
-              onPressed: () => Navigator.pop(context),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

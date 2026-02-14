@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:redplus_ft/domain/model/brand.dart';
 import 'package:redplus_ft/domain/model/brand_detail.dart';
 import 'package:redplus_ft/presentation/views/detail/post_detail_screen.dart';
+import 'package:redplus_ft/presentation/views/treatment/my_treatment_screen.dart';
 import '../../../domain/model/banner.dart';
 import '../../../domain/model/district.dart';
 import '../../../domain/model/treatment.dart';
@@ -110,6 +111,13 @@ final router = GoRouter(
       pageBuilder: (context, state) {
         final TreatmentModel args = state.extra as TreatmentModel;
         return MaterialPage(child: TreatmentDetailScreen(treatment: args));
+      },
+    ),
+    GoRoute(
+      name: AppRouteConstants.myTreatmentScreenRoute.name,
+      path: AppRouteConstants.myTreatmentScreenRoute.path,
+      pageBuilder: (context, state) {
+        return MaterialPage(child: MyTreatmentScreen());
       },
     ),
     GoRoute(
